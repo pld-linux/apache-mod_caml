@@ -8,8 +8,8 @@ Release:	1
 Group:		Networking/Daemons
 License:	BSD-like
 Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.gz
-#Source-md5:    b21b6a1fee031490a925895b88b3a92f
-Patch0:         %{mod_name}-Makefile.diff
+# Source-md5:	b21b6a1fee031490a925895b88b3a92f
+Patch0:		%{mod_name}-Makefile.diff
 URL:		ttp://merjis.com/developers/mod_caml/
 BuildRequires:	apache-devel >= 1.3.3
 BuildRequires:	%{apxs}
@@ -23,13 +23,12 @@ Requires:	apache >= 1.3.3
 Requires:	ocaml >= 3.0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _sysconfdir     %(%{apxs} -q SYSCONFDIR)
-%define         _pkglibdir      %(%{apxs} -q LIBEXECDIR)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR)
+%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
 
 # I don't understand it but it is neccessary if one strips 
 # it, it won't work. Help welcome. 
-%define         _noautostrip    .*\/mod_caml.so
-
+%define		_noautostrip	.*\/mod_caml.so
 
 %description
 mod_caml is a set of Objective CAML (OCaml) bindings for the Apache API. 
