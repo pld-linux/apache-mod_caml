@@ -1,7 +1,7 @@
 diff -urN mod_caml-1.3.4-orig/Makefile mod_caml-1.3.4-corrected/Makefile
 --- mod_caml-1.3.4-orig/Makefile	2004-11-20 00:12:14.000000000 +0100
-+++ mod_caml-1.3.4-corrected/Makefile	2004-12-05 21:23:54.445456776 +0100
-@@ -25,16 +25,16 @@
++++ mod_caml-1.3.4-corrected/Makefile	2004-12-12 22:17:53.614126176 +0100
+@@ -25,21 +25,21 @@
  SED := sed
  
  CC	:= $(CC)
@@ -21,18 +21,61 @@ diff -urN mod_caml-1.3.4-orig/Makefile mod_caml-1.3.4-corrected/Makefile
  ALL_CMAS += dynlink.cma str.cma pcre.cma unix.cma
  
  OCAMLDOCFLAGS := -html -stars -sort $(OCAMLCINCS)
-@@ -176,8 +176,9 @@
+ 
+-all:	META config.h mod_caml_config.ml mod_caml.so 500mod_caml.info \
++all:	META config.h mod_caml_config.ml mod_caml.so 150_mod_caml.conf \
+ 	$(ALL_CMXS) \
+ 	example-handlers example-scripts example-maillist example-comments \
+ 	html
+@@ -67,8 +67,26 @@
+ 	-e 's,@MAILER_ARGS@,$(MAILER_ARGS),g' \
+ 	< $< > $@
+ 
+-500mod_caml.info:
++150_mod_caml.conf:
+ 	echo LoadModule caml_module $(APACHELIBDIR)/mod_caml.so > $@
++	echo CamlLoad /usr/share/mod_caml/registry.cmo >> $@
++
++	echo CamlLoad /usr/lib/ocaml/postgres/postgres.cma  >> $@
++
++	echo CamlLoad /usr/lib/ocaml/dbi/dbi.cma >> $@
++	echo CamlLoad /usr/lib/ocaml/dbi/dbi_postgres.cmo >> $@
++
++	echo Alias /caml-icons/ /usr/share/mod_caml/caml-icons/ >> $@
++	echo Alias /caml-bin/ /usr/share/mod_caml/caml-bin/ >> $@
++
++	echo \<Location /caml-bin\> >>$@
++	echo        SetHandler ocaml-bytecode >> $@
++	echo        CamlHandler Registry.handler >> $@
++	echo        Options ExecCGI >> $@
++	echo         Allow from all >> $@
++	echo \<\/Location\> >> $@
++
++
+ 
+ mod_caml.so: mod_caml_c.o mod_caml.cmo apache_c.o wrappers.o $(ALL_CMOS)
+ 	$(OCAMLC) -linkall -custom $(OCAMLCFLAGS) $(ALL_CMAS) $^ -o $@ \
+@@ -154,7 +172,7 @@
+ clean:
+ 	rm -f *~ *.bak core *.o *.lo *.slo
+ 	rm -f *.cmi *.cmo *.cmx *.cma *.so *.a
+-	rm -f 500mod_caml.info
++	rm -f 150_mod_caml.conf
+ 	rm -f examples/*~
+ 	for d in examples/simple-scripts examples/useful-scripts \
+ 	    examples/simple-handlers examples/comments; do \
+@@ -176,8 +194,9 @@
  	$(INSTALL)    -m 0755 -d $(DESTDIR)$(APACHELIBDIR)
  	$(INSTALL)    -m 0755 -d $(DESTDIR)$(OCAMLAPACHEDIR)
  	$(INSTALL)    -m 0755 -d $(DESTDIR)$(MODCAMLLIBDIR)
 +	$(INSTALL)    -m 0755 -d $(DESTDIR)$(APACHECONFDIR)
  	$(INSTALL) -c -m 0755 mod_caml.so $(DESTDIR)$(APACHELIBDIR)
 -	$(INSTALL) -c -m 0644 500mod_caml.info $(DESTDIR)$(APACHELIBDIR)
-+	$(INSTALL) -c -m 0644 500mod_caml.info $(DESTDIR)$(APACHECONFDIR)/500mod_caml.conf
++	$(INSTALL) -c -m 0644 150_mod_caml.conf $(DESTDIR)$(APACHECONFDIR)/
  	$(INSTALL) -c -m 0644 mod_caml_config.cmi $(DESTDIR)$(OCAMLAPACHEDIR)
  	$(INSTALL) -c -m 0644 apache.mli apache.cmi $(DESTDIR)$(OCAMLAPACHEDIR)
  	$(INSTALL) -c -m 0644 mod_caml.mli mod_caml.cmi \
-@@ -232,9 +233,6 @@
+@@ -232,9 +251,6 @@
  install-doc:
  	$(INSTALL)    -m 0755 -d $(DESTDIR)$(DOCDIR)
  	$(INSTALL) -c -m 0644 AUTHORS FAQ README TODO $(DESTDIR)$(DOCDIR)
@@ -42,7 +85,7 @@ diff -urN mod_caml-1.3.4-orig/Makefile mod_caml-1.3.4-corrected/Makefile
  
  install-html:
  	$(INSTALL)    -m 0755 -d $(DESTDIR)$(DOCDIR)/html
-@@ -242,7 +240,7 @@
+@@ -242,7 +258,7 @@
  
  install-conf:
  	$(INSTALL)    -m 0755 -d $(DESTDIR)$(APACHECONFDIR)
@@ -53,7 +96,7 @@ diff -urN mod_caml-1.3.4-orig/Makefile mod_caml-1.3.4-corrected/Makefile
  	$(MAKE) check-manifest
 diff -urN mod_caml-1.3.4-orig/Makefile.config mod_caml-1.3.4-corrected/Makefile.config
 --- mod_caml-1.3.4-orig/Makefile.config	2004-11-20 00:12:14.000000000 +0100
-+++ mod_caml-1.3.4-corrected/Makefile.config	2004-12-05 21:26:59.182372496 +0100
++++ mod_caml-1.3.4-corrected/Makefile.config	2004-12-05 21:26:59.000000000 +0100
 @@ -25,8 +25,8 @@
  # For Apache 1.3, set this to 1
  # For Apache 2.x, set this to 2
