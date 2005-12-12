@@ -11,8 +11,8 @@ Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.
 # Source-md5:	b21b6a1fee031490a925895b88b3a92f
 Patch0:		%{mod_name}-Makefile.diff
 URL:		http://merjis.com/developers/mod_caml/
-BuildRequires:	apache-devel >= 1.3.3
 BuildRequires:	%{apxs}
+BuildRequires:	apache-devel >= 1.3.3
 BuildRequires:	apr-devel
 BuildRequires:	ocaml
 BuildRequires:	ocaml-findlib
@@ -26,8 +26,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	%(%{apxs} -q SYSCONFDIR)
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
 
-# I don't understand it but it is neccessary if one strips 
-# it, it won't work. Help welcome. 
+# I don't understand it but it is neccessary if one strips
+# it, it won't work. Help welcome.
 %define		_noautostrip	.*\/mod_caml.so
 
 %description
@@ -89,7 +89,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc COPYING.LIB CHANGES README examples html icons modcaml-example.conf
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/httpd.conf/*.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
 %{_libdir}/ocaml
 %{_datadir}/%{mod_name}
