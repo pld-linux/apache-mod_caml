@@ -1,3 +1,5 @@
+# TODO
+# - fix build for apache 2.2
 %define		mod_name	mod_caml
 %define 	apxs		/usr/sbin/apxs
 Summary:	Apache mod_caml module - allows using bytecode compiled ocaml files with apache
@@ -12,19 +14,18 @@ Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.
 Patch0:		%{mod_name}-Makefile.diff
 URL:		http://merjis.com/developers/mod_caml/
 BuildRequires:	%{apxs}
-BuildRequires:	apache-devel >= 1.3.3
+BuildRequires:	apache-devel >= 2.0
 BuildRequires:	apr-devel
 BuildRequires:	ocaml
 BuildRequires:	ocaml-findlib
 BuildRequires:	ocaml-pcre-devel
 BuildRequires:	ocaml-postgres
-Requires(post,preun):	%{apxs}
-Requires:	apache >= 1.3.3
+Requires:	apache(modules-api) = %apache_modules_api
 Requires:	ocaml >= 3.0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR)
-%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
+%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
 
 # I don't understand it but it is neccessary if one strips
 # it, it won't work. Help welcome.
@@ -41,8 +42,8 @@ the Apache webserver. However, it is much much more than just that:
    presentation).
  - Works with Apache 1.3 and Apache 2.0.
  - DBI library for simple database access.
- - DBI library can use Perl DBDs (database drivers)
-   [requires Perl4Caml >= 0.3.6].
+ - DBI library can use Perl DBDs (database drivers) [requires Perl4Caml
+   >= 0.3.6].
 
 %description -l pl
 mod_caml to zbiór dowi±zañ Objective CAML-a (OCamla) dla API Apache'a.
@@ -89,7 +90,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc COPYING.LIB CHANGES README examples html icons modcaml-example.conf
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
 %{_libdir}/ocaml
 %{_datadir}/%{mod_name}
