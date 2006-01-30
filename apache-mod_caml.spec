@@ -7,8 +7,8 @@ Summary(pl):	Modu³ Apache'a mod_caml - zapewniaj±cy obs³ugê skompilowanego do ba
 Name:		apache-%{mod_name}
 Version:	1.3.4
 Release:	2
-Group:		Networking/Daemons
 License:	BSD-like
+Group:		Networking/Daemons
 Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.gz
 # Source-md5:	b21b6a1fee031490a925895b88b3a92f
 Patch0:		%{mod_name}-Makefile.diff
@@ -20,6 +20,7 @@ BuildRequires:	ocaml
 BuildRequires:	ocaml-findlib
 BuildRequires:	ocaml-pcre-devel
 BuildRequires:	ocaml-postgres
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	ocaml >= 3.0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -76,15 +77,11 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /var/lock/subsys/httpd ]; then
-	/etc/rc.d/init.d/httpd restart 1>&2
-fi
+%service -q httpd restart
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/httpd ]; then
-		/etc/rc.d/init.d/httpd restart 1>&2
-	fi
+	%service -q httpd restart
 fi
 
 %files
