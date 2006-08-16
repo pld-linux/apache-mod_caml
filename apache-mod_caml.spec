@@ -10,7 +10,7 @@ Release:	2
 License:	BSD-like
 Group:		Networking/Daemons
 Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.gz
-# Source-md5:	b21b6a1fee031490a925895b88b3a92f
+# Source0-md5:	b21b6a1fee031490a925895b88b3a92f
 Patch0:		%{mod_name}-Makefile.diff
 URL:		http://merjis.com/developers/mod_caml/
 BuildRequires:	%{apxs}
