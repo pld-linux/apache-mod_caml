@@ -3,7 +3,7 @@
 %define		mod_name	mod_caml
 %define 	apxs		/usr/sbin/apxs
 Summary:	Apache mod_caml module - allows using bytecode compiled ocaml files with apache
-Summary(pl):	Modu³ Apache'a mod_caml - zapewniaj±cy obs³ugê skompilowanego do bajtkodu ocamla
+Summary(pl.UTF-8):   ModuÅ‚ Apache'a mod_caml - zapewniajÄ…cy obsÅ‚ugÄ™ skompilowanego do bajtkodu ocamla
 Name:		apache-%{mod_name}
 Version:	1.3.4
 Release:	2
@@ -46,18 +46,18 @@ the Apache webserver. However, it is much much more than just that:
  - DBI library can use Perl DBDs (database drivers) [requires Perl4Caml
    >= 0.3.6].
 
-%description -l pl
-mod_caml to zbiór dowi±zañ Objective CAML-a (OCamla) dla API Apache'a.
-Umo¿liwia uruchamianie skryptów CGI napisanych w OCamlu bezpo¶rednio
-wewn±trz serwera WWW Apache. Umo¿liwia jednak znacznie wiêcej:
- - dowi±zanie do dowolnej czê¶ci cyklu przetwarzania ¿±dania,
- - odczyt i modyfikowanie wewnêtrznych struktur Apache'a,
- - wspó³dzielenie modu³ów kodu miêdzy procedurami obs³ugi a skryptami,
- - udostêpnia bibliotekê CGI i system szablonów (umo¿lwiaj±cych
+%description -l pl.UTF-8
+mod_caml to zbiÃ³r dowiÄ…zaÅ„ Objective CAML-a (OCamla) dla API Apache'a.
+UmoÅ¼liwia uruchamianie skryptÃ³w CGI napisanych w OCamlu bezpoÅ›rednio
+wewnÄ…trz serwera WWW Apache. UmoÅ¼liwia jednak znacznie wiÄ™cej:
+ - dowiÄ…zanie do dowolnej czÄ™Å›ci cyklu przetwarzania Å¼Ä…dania,
+ - odczyt i modyfikowanie wewnÄ™trznych struktur Apache'a,
+ - wspÃ³Å‚dzielenie moduÅ‚Ã³w kodu miÄ™dzy procedurami obsÅ‚ugi a skryptami,
+ - udostÄ™pnia bibliotekÄ™ CGI i system szablonÃ³w (umoÅ¼lwiajÄ…cych
    oddzielenie kodu i prezentacji),
- - dzia³a z Apache 1.3 i Apache 2.0,
- - udostêpnia bibliotekê DBI do prostego dostêpu do baz danych,
- - udostêpnia bibliotekê DBI wykorzystuj±c± sterowniki DBD Perla
+ - dziaÅ‚a z Apache 1.3 i Apache 2.0,
+ - udostÄ™pnia bibliotekÄ™ DBI do prostego dostÄ™pu do baz danych,
+ - udostÄ™pnia bibliotekÄ™ DBI wykorzystujÄ…cÄ… sterowniki DBD Perla
    (wymaga pakietu Perl4Caml >= 0.3.6).
 
 %prep
