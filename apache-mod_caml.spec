@@ -3,7 +3,7 @@
 %define		mod_name	mod_caml
 %define 	apxs		/usr/sbin/apxs
 Summary:	Apache mod_caml module - allows using bytecode compiled ocaml files with apache
-Summary(pl.UTF-8):   Moduł Apache'a mod_caml - zapewniający obsługę skompilowanego do bajtkodu ocamla
+Summary(pl.UTF-8):	Moduł Apache'a mod_caml - zapewniający obsługę skompilowanego do bajtkodu ocamla
 Name:		apache-%{mod_name}
 Version:	1.3.4
 Release:	2
