@@ -13,7 +13,7 @@ Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.
 # Source0-md5:	b21b6a1fee031490a925895b88b3a92f
 Patch0:		%{mod_name}-Makefile.diff
 URL:		http://merjis.com/developers/mod_caml/
-BuildRequires:	apache-apxs >= 2.0
+BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	apr-devel
 BuildRequires:	ocaml
