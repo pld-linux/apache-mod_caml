@@ -8,7 +8,7 @@ Name:		apache-%{mod_name}
 Version:	1.3.4
 Release:	2
 License:	BSD-like
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Source0:	http://savannah.nongnu.org/download/modcaml/%{mod_name}-%{version}.tar.gz
 # Source0-md5:	b21b6a1fee031490a925895b88b3a92f
 Patch0:		%{mod_name}-Makefile.diff
