@@ -62,7 +62,7 @@ wewnątrz serwera WWW Apache. Umożliwia jednak znacznie więcej:
 
 %prep
 %setup -q -n %{mod_name}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__make}
